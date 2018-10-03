@@ -29,3 +29,4 @@ Obviously tweak `FAIL_MCGAUGHEY` to match your FAIL pattern (usually just `FAIL`
 `~/git/akt/./akt pca --force cohort_1000G.vcf.gz  > akt.pca.txt`
 
 ## Step Seven - Plot
+Run [pca_plot.R](pca_plot.R)
