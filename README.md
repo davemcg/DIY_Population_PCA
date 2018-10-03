@@ -11,15 +11,17 @@ If you are starting from scratch then you'll have the download the chromosome sp
 
 **Open a github issue if you want to be lazy and I'll make this file available for you**
 
-## Step Three - Only keep PASS on your VCF (optional, obviously tweak for whatever your FAIL pattern is)
-`zgrep -v FAIL_MCGAUGHEY ../vcfs.GATK.vcf.gz | bgzip > vcfs.PASS.GATK.vcf.gz`
-`tabix -p vcf vcfs.PASS.GATK.vcf.gz`
+## Step Three - Only keep AC above 30 and PASS on your VCF (optional, obviously tweak for whatever your FAIL pattern is)
+`bcftools view --min-ac 30 ../vcfs.GATK.vcf.gz | zgrep -v FAIL_MCGAUGHEY | bgzip > vcfs.AC30.PASS.vcf.gz`
+
+`tabix -p vcf vcfs.AC30.PASS.vcf.gz`
 
 ## Step Four - Filter down 1000G VCF to positions in your VCF
-`bcftools isec /fdb/1000genomes/release/20130502/reduced.ALL.phase3_shapeit2_mvncall_integrated_v5.20130502.genotypes.vcf.gz vcfs.PASS.GATK.vcf.gz -p intersection -n =2 -w 1 -O z`
+`bcftools isec /fdb/1000genomes/release/20130502/reduced.ALL.phase3_shapeit2_mvncall_integrated_v5.20130502.genotypes.vcf.gz vcfs.AC30.PASS.vcf.gz -p intersection -n =2 -w 1 -O z`
 
 ## Step Five - Merge VCFs together
-`bcftools merge vcfs.PASS.GATK.vcf.gz intersection/0000.vcf.gz -O z -o cohort_1000G.vcf.gz`
+`bcftools merge vcfs.AC30.PASS.vcf.gz intersection/0000.vcf.gz -O z -o cohort_1000G.vcf.gz`
+
 `tabix -p cohort_1000G.vcf.gz`
 
 ## Run akt pca
