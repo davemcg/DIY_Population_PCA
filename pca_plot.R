@@ -8,16 +8,6 @@ plot <- pca %>%
   left_join(g1k, by=c('V1' = 'Sample name')) %>%
   mutate(`Population name` = case_when(grepl('^IG', V1) ~ 'Colombia Cohort',
                                        TRUE ~ `Population name`)) %>%
-  ggplot(aes(x=V2, y=V3, colour = `Population name`, tooltip = paste(V1, `Population name`))) +
-  geom_point_interactive(alpha=0.4) +
-  theme_minimal()
-ggiraph(code = print(plot) )
-
-
-pca %>%
-  left_join(g1k, by=c('V1' = 'Sample name')) %>%
-  mutate(`Population name` = case_when(grepl('^IG', V1) ~ 'Colombia Cohort',
-                                       TRUE ~ `Population name`)) %>%
   ggplot(aes(x=V2, y=V3, colour = `Population name`, tooltip = paste(V1, '-', `Population name`))) +
   geom_point_interactive(alpha=0.4) +
   xlab('PC1') + ylab('PC2') +
