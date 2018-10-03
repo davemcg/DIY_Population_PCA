@@ -25,5 +25,7 @@ Obviously tweak `FAIL_MCGAUGHEY` to match your FAIL pattern (usually just `FAIL`
 
 `tabix -p cohort_1000G.vcf.gz`
 
-## Run akt pca
+## Step Six - Run akt pca
 `~/git/akt/./akt pca --force cohort_1000G.vcf.gz  > akt.pca.txt`
+
+## Step Seven - Plot
