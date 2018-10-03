@@ -13,6 +13,7 @@ If you are starting from scratch then you'll have the download the chromosome sp
 
 ## Step Three - Only keep AC above 30 and PASS on your VCF
 Obviously tweak `FAIL_MCGAUGHEY` to match your FAIL pattern (usually just `FAIL`)
+
 `bcftools view --min-ac 30 ../vcfs.GATK.vcf.gz | zgrep -v FAIL_MCGAUGHEY | bgzip > vcfs.AC30.PASS.vcf.gz`
 
 `tabix -p vcf vcfs.AC30.PASS.vcf.gz`
