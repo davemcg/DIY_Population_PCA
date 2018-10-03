@@ -9,9 +9,10 @@ I'm going to 100% cheat and just grab it from [biowulf](hpc.nih.gov), as the adm
 
 If you are starting from scratch then you'll have the download the chromosome specific vcfs from http://ftp.1000genomes.ebi.ac.uk/vol1/ftp/release/20130502/ then merge them all together with something like `bcftools concat`.
 
-**Open a github issue if you want to be lazy and I'll make this file available for you**
+**Open a github issue if you want to be lazy and I'll make this file available to you**
 
-## Step Three - Only keep AC above 30 and PASS on your VCF (optional, obviously tweak for whatever your FAIL pattern is)
+## Step Three - Only keep AC above 30 and PASS on your VCF
+Obviously tweak `FAIL_MCGAUGHEY` to match your FAIL pattern (usually just `FAIL`)
 `bcftools view --min-ac 30 ../vcfs.GATK.vcf.gz | zgrep -v FAIL_MCGAUGHEY | bgzip > vcfs.AC30.PASS.vcf.gz`
 
 `tabix -p vcf vcfs.AC30.PASS.vcf.gz`
